@@ -1,12 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 
-// TODO (student): Implement single-post view and delete flow.
-// Suggested steps:
-// 1) Fetch a single post with GET /api/posts/:id.
-// 2) Render title, author, date, and content.
-// 3) Add delete handler with DELETE /api/posts/:id.
-// 4) Navigate back to /blog after successful delete.
 function PostPage() {
   const { id } = useParams()
   const navigate = useNavigate()
