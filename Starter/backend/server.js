@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 require("dotenv").config();
 
 const postsRouter = require("./routes/posts");
@@ -24,6 +25,12 @@ async function connectToDatabase() {
 }
 
 app.use(express.json());
+
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL || "http://localhost:5173",
+  }),
+);
 
 app.use("/api/posts", postsRouter);
 
