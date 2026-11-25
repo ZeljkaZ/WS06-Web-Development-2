@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PostForm from "../components/PostForm.jsx";
+import API_URL from '../api.js'
 
 function NewPostPage() {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ function NewPostPage() {
         content: formData.get("content"),
       };
 
-      const response = await fetch("/api/posts", {
+      const response = await fetch(`${API_URL}/api/posts`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

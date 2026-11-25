@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import PostCard from "../components/PostCard.jsx";
+import API_URL from '../api.js'
 
 function HomePage() {
   const [posts, setPosts] = useState([]);
@@ -9,7 +10,7 @@ function HomePage() {
   useEffect(() => {
     async function fetchPosts() {
       try {
-        const response = await fetch("/api/posts");
+        const response = await fetch(`${API_URL}/api/posts`);
 
         if (!response.ok) {
           throw new Error("Failed to fetch posts");

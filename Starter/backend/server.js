@@ -17,7 +17,7 @@ async function connectToDatabase() {
   }
 
   try {
-    await mongoose.connect(process.env.MONGODB_URI, { dbName: "blog" });
+    await mongoose.connect(process.env.MONGODB_URI, { dbName: "blog_ws06" });
     console.log("Connected to MongoDB");
   } catch (error) {
     console.error(`MongoDB connection error: ${error.message}`);
