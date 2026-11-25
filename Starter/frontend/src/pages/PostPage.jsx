@@ -16,16 +16,50 @@ function PostPage() {
   const [error, setError] = useState(null)
   const [deleting, setDeleting] = useState(false)
 
-  useEffect(() => {
-    // TODO (student): Replace this placeholder with GET /api/posts/:id fetch logic.
-    setLoading(false)
+    useEffect(() => {
+    async function fetchPost() {
+      try {
+        setLoading(true)
+        setError(null)
+
+        const response = await fetch(`/api/posts/${id}`)
+        const data = await response.json()
+
+        if (!response.ok) {
+          throw new Error(data.error || 'Failed to fetch post')
+        }
+
+        setPost(data)
+      } catch (error) {
+        setError(error.message)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchPost()
   }, [id])
 
-  async function handleDelete() {
-    // TODO (student): Implement DELETE /api/posts/:id and navigate('/blog').
+    async function handleDelete() {
     setDeleting(true)
-    setError('TODO: implement DELETE /api/posts/:id in PostPage')
-    setDeleting(false)
+    setError(null)
+
+    try {
+      const response = await fetch(`/api/posts/${id}`, {
+        method: 'DELETE',
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to delete post')
+      }
+
+      navigate('/blog')
+    } catch (error) {
+      setError(error.message)
+      setDeleting(false)
+    }
   }
 
   if (loading) return <p className="status-msg">Loading…</p>
